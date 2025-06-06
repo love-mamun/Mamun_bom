@@ -1,0 +1,8 @@
+RewriteEngine On
+
+# যদি ফাইল বা ডিরেক্টরি না থাকে, তবে নিচের রুল প্রয়োগ করো
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# URL থেকে .php বাদ দিয়ে কল করলে .php ফাইল এক্সিকিউট করবে
+RewriteRule ^([a-zA-Z0-9_-]+)$ $1.php [L]
