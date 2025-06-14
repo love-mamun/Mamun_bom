@@ -1,0 +1,32 @@
+name: Facebook Auto Share (Manual Input)
+
+on:
+  workflow_dispatch:
+    inputs:
+      cookie:
+        description: 'Your Facebook Cookie'
+        required: true
+      url:
+        description: 'The URL to Share'
+        required: true
+      limit:
+        description: 'How many times to share'
+        required: true
+        default: '1'
+
+jobs:
+  fb_share:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+
+      - name: Install Dependencies
+        run: pip install requests
+
+      - name: Run Facebook Share Script
+        run: python SHARE.py "${{ github.event.inputs.cookie }}" "${{ github.event.inputs.url }}" "${{ github.event.inputs.limit }}"
